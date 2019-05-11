@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NewBookModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_Books_Authors" FromRole="Authors" ToRole="Books" />
+  </EntityType>
+  <EntityType Name="Book_to_Janr">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Book_id" Type="Int32" />
+    <Property Name="Janr_id" Type="Int32" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_Book_to_Janr_Books" FromRole="Book_to_Janr" ToRole="Books" />
+    <NavigationProperty Name="Janr" Relationship="Self.FK_Book_to_Janr_Janr" FromRole="Book_to_Janr" ToRole="Janr" />
+  </EntityType>
+  <EntityType Name="Book_to_Readers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="book_id" Type="Int32" />
+    <Property Name="reader_id" Type="Int32" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_Book_to_Readers_Books" FromRole="Book_to_Readers" ToRole="Books" />
+    <NavigationProperty Name="Reader" Relationship="Self.FK_Book_to_Readers_Readers" FromRole="Book_to_Readers" ToRole="Readers" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="author_id" Type="Int32" />
+    <NavigationProperty Name="Author" Relationship="Self.FK_Books_Authors" FromRole="Books" ToRole="Authors" />
+    <NavigationProperty Name="Book_to_Janr" Relationship="Self.FK_Book_to_Janr_Books" FromRole="Books" ToRole="Book_to_Janr" />
+    <NavigationProperty Name="Book_to_Readers" Relationship="Self.FK_Book_to_Readers_Books" FromRole="Books" ToRole="Book_to_Readers" />
+  </EntityType>
+  <EntityType Name="Faculty">
+    <Key>
+      <PropertyRef Name="İd" />
+    </Key>
+    <Property Name="İd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Readers" Relationship="Self.FK_Readers_Faculty" FromRole="Faculty" ToRole="Readers" />
+  </EntityType>
+  <EntityType Name="Janr">
+    <Key>
+      <PropertyRef Name="İd" />
+    </Key>
+    <Property Name="İd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Janr_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Book_to_Janr" Relationship="Self.FK_Book_to_Janr_Janr" FromRole="Janr" ToRole="Book_to_Janr" />
+  </EntityType>
+  <EntityType Name="Reader">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Faculty_id" Type="Int32" />
+    <NavigationProperty Name="Book_to_Readers" Relationship="Self.FK_Book_to_Readers_Readers" FromRole="Readers" ToRole="Book_to_Readers" />
+    <NavigationProperty Name="Faculty" Relationship="Self.FK_Readers_Faculty" FromRole="Readers" ToRole="Faculty" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Books_Authors">
+    <End Role="Authors" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Books" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Authors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="author_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_to_Janr_Books">
+    <End Role="Books" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Book_to_Janr" Type="Self.Book_to_Janr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book_to_Janr">
+        <PropertyRef Name="Book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_to_Janr_Janr">
+    <End Role="Janr" Type="Self.Janr" Multiplicity="0..1" />
+    <End Role="Book_to_Janr" Type="Self.Book_to_Janr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Janr">
+        <PropertyRef Name="İd" />
+      </Principal>
+      <Dependent Role="Book_to_Janr">
+        <PropertyRef Name="Janr_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_to_Readers_Books">
+    <End Role="Books" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Book_to_Readers" Type="Self.Book_to_Readers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book_to_Readers">
+        <PropertyRef Name="book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_to_Readers_Readers">
+    <End Role="Readers" Type="Self.Reader" Multiplicity="0..1" />
+    <End Role="Book_to_Readers" Type="Self.Book_to_Readers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Readers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book_to_Readers">
+        <PropertyRef Name="reader_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Readers_Faculty">
+    <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+    <End Role="Readers" Type="Self.Reader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculty">
+        <PropertyRef Name="İd" />
+      </Principal>
+      <Dependent Role="Readers">
+        <PropertyRef Name="Faculty_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NewBookEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Authors" EntityType="Self.Author" />
+    <EntitySet Name="Book_to_Janr" EntityType="Self.Book_to_Janr" />
+    <EntitySet Name="Book_to_Readers" EntityType="Self.Book_to_Readers" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+    <EntitySet Name="Janrs" EntityType="Self.Janr" />
+    <EntitySet Name="Readers" EntityType="Self.Reader" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Books_Authors" Association="Self.FK_Books_Authors">
+      <End Role="Authors" EntitySet="Authors" />
+      <End Role="Books" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_to_Janr_Books" Association="Self.FK_Book_to_Janr_Books">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Book_to_Janr" EntitySet="Book_to_Janr" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_to_Janr_Janr" Association="Self.FK_Book_to_Janr_Janr">
+      <End Role="Janr" EntitySet="Janrs" />
+      <End Role="Book_to_Janr" EntitySet="Book_to_Janr" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_to_Readers_Books" Association="Self.FK_Book_to_Readers_Books">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Book_to_Readers" EntitySet="Book_to_Readers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_to_Readers_Readers" Association="Self.FK_Book_to_Readers_Readers">
+      <End Role="Readers" EntitySet="Readers" />
+      <End Role="Book_to_Readers" EntitySet="Book_to_Readers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Readers_Faculty" Association="Self.FK_Readers_Faculty">
+      <End Role="Faculty" EntitySet="Faculties" />
+      <End Role="Readers" EntitySet="Readers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

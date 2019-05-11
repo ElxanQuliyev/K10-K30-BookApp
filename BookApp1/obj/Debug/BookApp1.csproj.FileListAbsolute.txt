@@ -1,0 +1,15 @@
+C:\Users\User\source\repos\BookApp1\BookApp1\bin\Debug\BookApp1.exe.config
+C:\Users\User\source\repos\BookApp1\BookApp1\bin\Debug\BookApp1.exe
+C:\Users\User\source\repos\BookApp1\BookApp1\bin\Debug\BookApp1.pdb
+C:\Users\User\source\repos\BookApp1\BookApp1\bin\Debug\EntityFramework.dll
+C:\Users\User\source\repos\BookApp1\BookApp1\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\User\source\repos\BookApp1\BookApp1\bin\Debug\EntityFramework.xml
+C:\Users\User\source\repos\BookApp1\BookApp1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\User\source\repos\BookApp1\BookApp1\obj\Debug\BookApp1.csprojAssemblyReference.cache
+C:\Users\User\source\repos\BookApp1\BookApp1\obj\Debug\BookApp1.Form1.resources
+C:\Users\User\source\repos\BookApp1\BookApp1\obj\Debug\BookApp1.Properties.Resources.resources
+C:\Users\User\source\repos\BookApp1\BookApp1\obj\Debug\BookApp1.csproj.GenerateResource.cache
+C:\Users\User\source\repos\BookApp1\BookApp1\obj\Debug\BookApp1.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\BookApp1\BookApp1\obj\Debug\BookApp1.csproj.CopyComplete
+C:\Users\User\source\repos\BookApp1\BookApp1\obj\Debug\BookApp1.exe
+C:\Users\User\source\repos\BookApp1\BookApp1\obj\Debug\BookApp1.pdb
